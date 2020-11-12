@@ -1,4 +1,6 @@
 import { createRouter, createWebHistory } from 'vue-router'
+
+const Caricature = () => import('../views/Caricature.vue')
 const Home = () => import('../views/Home.vue')
 const Search = () => import('../views/SearchView.vue')
 
@@ -7,25 +9,37 @@ const Comic = () => import('../views/Comic.vue')
 
 const routes = [
   {
-    path: '/',
-    name: 'Home',
-    component: Home
+    path: '',
+    redirect: '/caricature/home'
   },
   {
-    path: '/search',
-    name: 'Search',
-    component: Search
+    path: '/caricature',
+    name: 'Caricature',
+    component: Caricature,
+    children: [
+      {
+        path: '/home',
+        name: 'Home',
+        component: Home,
+      },
+      {
+        path: '/search',
+        name: 'Search',
+        component: Search
+      },
+      {
+        path: '/detail',
+        name: 'Detail',
+        component: Detail
+      },
+      {
+        path: '/comic',
+        name: 'Comic',
+        component: Comic
+      },
+    ]
   },
-  {
-    path: '/detail',
-    name: 'Detail',
-    component: Detail
-  },
-  {
-    path: '/comic',
-    name: 'Comic',
-    component: Comic
-  },
+ 
 ]
 
 const router = createRouter({
