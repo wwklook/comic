@@ -1,9 +1,6 @@
 <template>
   <div class="view" @scroll="scrollEvent">
-    <view-port
-      v-if="data.length != 0"
-      :data="data[index].current_chapter"
-    />
+    <view-port v-if="data.length != 0" :data="data[index].current_chapter" />
     <div
       class="all_pic"
       v-for="val in data"
@@ -21,13 +18,13 @@
           alt=""
         />
       </div>
-      >
     </div>
   </div>
 </template>
 
 <script>
 import { get_chapterinfo } from "@/network/caricature.js";
+import { debounce, throttle } from "@/commonjs/utils.js";
 import ViewPort from "@/components/ViewPort.vue";
 
 export default {
@@ -89,7 +86,7 @@ export default {
       }
     });
   },
-  activated() {
+  mounted() {
     if (this.chapter_newid == this.$route.query.chapter_newid) {
       return;
     }
@@ -114,11 +111,25 @@ export default {
         document.title = data.comic_name + data.current_chapter.chapter_name;
       });
     },
-    scrollEvent() {
+    test() {},
+    scrollEvent: throttle(function () {
       if (this.$el.scrollTop == this.$el.scrollHeight - window.innerHeight) {
-        console.log(0);
+        if (this.data[this.index].next_chapter == null) {
+          return;
+        }
+        this.chapter_newid = this.data[this.index].next_chapter.chapter_newid;
+        this.get_chapter();
       }
-    },
+      let index = 0;
+      for (let i = 0; i < this.top.length; i++) {
+        index = i;
+        if (this.$el.scrollTop < this.top[i]) {
+          this.index = i - 1;
+          return;
+        }
+      }
+      this.index = index;
+    }, 500),
   },
 };
 </script>

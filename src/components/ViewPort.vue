@@ -1,6 +1,8 @@
 <template>
   <div class="view_port">
-    <headers class="headers" ref="hd" :title="data.chapter_name"> </headers>
+    <div class="headers" ref="hd">
+      <headers :title="data.chapter_name"> </headers>
+    </div>
     <div class="footer" ref="ft">
       <div class="footer_item">
         <img src="@/assets/comic/catalog.svg" />
@@ -15,7 +17,7 @@
         <div>上一章</div>
       </div>
       <div class="footer_item" @click="next">
-        <img src="@/assets/comic/next.svg"/>
+        <img src="@/assets/comic/next.svg" />
         <div>下一章</div>
       </div>
     </div>
@@ -25,30 +27,32 @@
 <script>
 import Headers from "@/components/common/Headers.vue";
 export default {
-  name: "view-port",
+  name: "ViewPort",
   components: {
     Headers,
   },
-  created() {
+  mounted() {
+    console.log(this.$refs);
     this.$bus.on("showViewPort", (isShowViewPort) => {
+      console.log();
       if (isShowViewPort) {
-        this.$refs.hd.$el.style.top = "-49px";
-        this.$refs.ft.style.bottom = "-59px";
+        this.$el.firstChild.style.top = "-49px";
+        this.$el.lastChild.style.bottom = "-59px";
       } else {
-        this.$refs.hd.$el.style.top = "0";
-        this.$refs.ft.style.bottom = "0";
+        this.$el.firstChild.style.top = "0";
+        this.$el.lastChild.style.bottom = "0";
       }
     });
   },
   props: ["data"],
   methods: {
-    prev(){
+    prev() {
       this.$bus.emit("prev_chapter");
     },
-    next(){
+    next() {
       this.$bus.emit("next_chapter");
-    }
-  }
+    },
+  },
 };
 </script>
 
@@ -59,6 +63,7 @@ export default {
 
 .headers {
   height: 49px;
+  line-height: 49px;
   top: -49px;
   left: 0;
   right: 0;

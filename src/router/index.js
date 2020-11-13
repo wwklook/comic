@@ -18,22 +18,22 @@ const routes = [
     component: Caricature,
     children: [
       {
-        path: '/home',
+        path: 'home',
         name: 'Home',
         component: Home,
       },
       {
-        path: '/search',
+        path: 'search',
         name: 'Search',
         component: Search
       },
       {
-        path: '/detail',
+        path: 'detail',
         name: 'Detail',
         component: Detail
       },
       {
-        path: '/comic',
+        path: 'comic',
         name: 'Comic',
         component: Comic
       },

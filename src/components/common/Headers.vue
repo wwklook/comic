@@ -12,7 +12,7 @@
 
 <script>
 export default {
-  name: "headers",
+  name: "Headers",
   props: ["title"],
   methods: {
     goBack() {
