@@ -112,7 +112,8 @@ export default {
       });
     },
     test() {},
-    scrollEvent: throttle(function () {
+    scrollEvent: debounce(function () {
+      console.log(1);
       if (this.$el.scrollTop == this.$el.scrollHeight - window.innerHeight) {
         if (this.data[this.index].next_chapter == null) {
           return;

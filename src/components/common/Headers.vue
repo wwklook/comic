@@ -6,7 +6,9 @@
       /></slot>
       <h1 class="header_title">{{ title }}</h1>
     </div>
-    <slot name="right"><img class="home" src="@/assets/home.svg" @click="goHome"/></slot>
+    <slot name="right"
+      ><img class="home" src="@/assets/home.svg" @click="goHome"
+    /></slot>
   </div>
 </template>
 
@@ -18,15 +20,17 @@ export default {
     goBack() {
       this.$router.back();
     },
-    goHome(){
-      this.$router.push({name: "Home"})
-    }
+    goHome() {
+      this.$router.push({ name: "Home" });
+    },
   },
 };
 </script>
 
 <style scoped>
 .header {
+  height: 49px;
+  line-height: 49px;
   display: flex;
   align-items: center;
   justify-content: space-between;

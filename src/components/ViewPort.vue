@@ -26,6 +26,8 @@
 
 <script>
 import Headers from "@/components/common/Headers.vue";
+import { debounce, throttle } from "@/commonjs/utils.js";
+
 export default {
   name: "ViewPort",
   components: {
@@ -46,12 +48,12 @@ export default {
   },
   props: ["data"],
   methods: {
-    prev() {
+    prev: throttle(function () {
       this.$bus.emit("prev_chapter");
-    },
-    next() {
+    }, 1000),
+    next: throttle(function () {
       this.$bus.emit("next_chapter");
-    },
+    }, 1000),
   },
 };
 </script>
@@ -62,8 +64,6 @@ export default {
 }
 
 .headers {
-  height: 49px;
-  line-height: 49px;
   top: -49px;
   left: 0;
   right: 0;

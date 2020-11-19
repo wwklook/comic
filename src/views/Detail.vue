@@ -1,5 +1,7 @@
 <template>
   <div class="">
+    <headers :title="comic_title"> </headers>
+    <img class="img" :src="imgsrc" :alt="comic_title">
     <div class="icon_title">
       <h2>详情</h2>
     </div>
@@ -24,15 +26,21 @@
         {{ val.title }}
       </li>
     </ul>
+    <go-top/>
   </div>
 </template>
 
 <script>
+import Headers from "@/components/common/Headers.vue";
+import GoTop from "@/components/common/GoTop.vue";
 import { get_chapter } from "@/network/caricature.js";
 
 export default {
   name: "Detail",
-  components: {},
+  components: {
+    Headers,
+    GoTop
+  },
   data() {
     return {
       comic_id: "",
@@ -40,6 +48,8 @@ export default {
       describe: "加载中...",
       update_status: "加载中...",
       isSort: true,
+      comic_title: "漫画",
+      imgsrc: "",
     };
   },
   activated() {
@@ -51,7 +61,8 @@ export default {
       this.catalog = res.data.catalog;
       this.describe = res.data.describe;
       this.update_status = res.data.update_status;
-      console.log(res.data);
+      this.comic_title = res.data.comic_title;
+      this.imgsrc =res.data.imgsrc;
     });
   },
   methods: {
@@ -76,6 +87,12 @@ h2 {
   background-color: #66ccff;
   padding: 0 20px 0 5px;
   border-radius: 0 20px 20px 0;
+}
+
+.img {
+  width: 100%;
+  height: auto;
+  margin-bottom: 5px;
 }
 
 .icon_title {
