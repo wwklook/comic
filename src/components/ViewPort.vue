@@ -34,9 +34,7 @@ export default {
     Headers,
   },
   mounted() {
-    console.log(this.$refs);
     this.$bus.on("showViewPort", (isShowViewPort) => {
-      console.log();
       if (isShowViewPort) {
         this.$el.firstChild.style.top = "-49px";
         this.$el.lastChild.style.bottom = "-59px";

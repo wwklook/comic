@@ -1,33 +1,26 @@
-export function debounce(func, delay) {
-  let timer = null;
-  return function (...args) {
-    clearTimeout(timer)
-    timer = setTimeout(() => {
-      func.apply(this, args)
-    }, delay)
-  }
+export function debounce(fn, delay) {
+	let timer = null;
+	return function(...args) {
+		if (timer) clearTimeout(timer)
+		let isFirst = !timer;
+		if (isFirst) {
+			fn.apply(this, args)
+		}
+		timer = setTimeout(() => {
+			timer = null
+		}, delay)
+	}
 }
 
-export function throttle(func, delay) {
-  let lastTime = null;
-  let timeout;
-  return function () {
-    let context = this;
-    let now = new Date();
-    let arg = arguments;
-    if (now - lastTime - delay > 0) {
-      if (timeout) {
-        clearTimeout(timeout)
-        timeout = null
-      }
-      func.apply(context, arg)
-      lastTime = now
-    } else if (!timeout) {
-      timeout = setTimeout(() => {
-        func.apply(context, arg)
-      }, delay)
-    }
-  }
+export function throttle(fn, delay) {
+	let lastTime = null;
+	return function(...args) {
+		let now = new Date().getTime()
+		if (now - lastTime > delay) {
+			fn.apply(this, args)
+			lastTime = now
+		}
+	}
 }
 
 export function animate(obj, json, speed=10, fn=null) {

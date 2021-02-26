@@ -20,7 +20,7 @@
         class="chapter_item ellipsis"
         v-for="(val, key) in catalog"
         :key="key"
-        @click="toComic(val.href)"
+        @click="toContent(val.href)"
       >
         <time class="update">{{ val["update-time"] }}</time>
         {{ val.title }}
@@ -66,10 +66,10 @@ export default {
     });
   },
   methods: {
-    toComic(href) {
+    toContent(href) {
       let h = href.split("/");
       this.$router.push({
-        name: "Comic",
+        name: "Content",
         query: { comic_id: h[1], chapter_newid: h[2].slice(0, -5) },
       });
     },

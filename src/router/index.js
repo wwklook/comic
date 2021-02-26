@@ -1,21 +1,21 @@
 import { createRouter, createWebHistory } from 'vue-router'
 
-const Caricature = () => import('../views/Caricature.vue')
+const Comic = () => import('../views/Comic.vue')
 const Home = () => import('../views/Home.vue')
 const Search = () => import('../views/SearchView.vue')
 
 const Detail = () => import('../views/Detail.vue')
-const Comic = () => import('../views/Comic.vue')
+const Content = () => import('../views/Content.vue')
 
 const routes = [
   {
     path: '',
-    redirect: '/caricature/home'
+    redirect: '/comic/home'
   },
   {
-    path: '/caricature',
-    name: 'Caricature',
-    component: Caricature,
+    path: '/comic',
+    name: 'Comic',
+    component: Comic,
     children: [
       {
         path: 'home',
@@ -33,9 +33,9 @@ const routes = [
         component: Detail
       },
       {
-        path: 'comic',
-        name: 'Comic',
-        component: Comic
+        path: 'content',
+        name: 'Content',
+        component: Content
       },
     ]
   },
