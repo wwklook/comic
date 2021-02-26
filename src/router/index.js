@@ -16,6 +16,7 @@ const routes = [
     path: '/comic',
     name: 'Comic',
     component: Comic,
+    redirect: '/comic/home',
     children: [
       {
         path: 'home',
